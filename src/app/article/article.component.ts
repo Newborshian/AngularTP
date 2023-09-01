@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Article } from '../article.model';
 import { HttpserviceService } from '../httpservice.service';
 
@@ -7,7 +7,7 @@ import { HttpserviceService } from '../httpservice.service';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent {
  
   @Input()
   public article!: Article;
@@ -20,9 +20,6 @@ export class ArticleComponent implements OnInit {
 
   constructor(private serviceArticle : HttpserviceService){ }
 
-  ngOnInit(): void {
-      
-  }
 
   deleteArticle(id: number){
     this.serviceArticle.deleteArticle(id).subscribe(res =>{
