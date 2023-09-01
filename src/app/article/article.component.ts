@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { Article } from '../article.model';
 import { HttpserviceService } from '../httpservice.service';
 
@@ -7,13 +7,16 @@ import { HttpserviceService } from '../httpservice.service';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css']
 })
-export class ArticleComponent implements OnInit{
+export class ArticleComponent implements OnInit {
  
   @Input()
   public article!: Article;
   
   @Output()
   articleDeleted : EventEmitter<boolean> = new EventEmitter();
+
+  @Output()
+  changingVotes: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private serviceArticle : HttpserviceService){ }
 
@@ -22,21 +25,21 @@ export class ArticleComponent implements OnInit{
   }
 
   deleteArticle(id: number){
-    console.log(id);
     this.serviceArticle.deleteArticle(id).subscribe(res =>{
       this.articleDeleted.emit(true);
     });
    
   }
+
   voteUp() {
     this.article.votes++;
-    console.log(this.article);
-    
+    this.changingVotes.emit(true);
   }
 
   
   voteDown() {
-      this.article.votes--;
+    this.article.votes--;
+    this.changingVotes.emit(true);
   }
 
 }

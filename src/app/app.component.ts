@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Article } from './article.model';
 import { HttpserviceService } from './httpservice.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,6 +26,10 @@ export class AppComponent implements OnInit{
       this.articles = res;
     })
     this.sortedArticles();
+  }
+
+  changingVotes(event: boolean){
+    this.sortedArticles()
   }
 
   articleDeleted(event: boolean){
