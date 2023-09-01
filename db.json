@@ -1,45 +1,6 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": 5,
-      "tittle": "test",
-      "author": "testcreate"
-    },
-    {
-      "id": 6,
-      "tittle": "test",
-      "author": "testcreate"
-    },
-    {
-      "id": 7,
-      "tittle": "test",
-      "author": "testcreate"
-    },
-    {
-      "id": 8,
-      "tittle": "Hello World !",
-      "link": "http://ceciestuntest.io",
-      "votes": 10
-    },
-    {
-      "title": "Hello World !",
-      "link": "http//ceciestuntest.io",
-      "votes": 10,
-      "id": 9
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "posts": [],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }

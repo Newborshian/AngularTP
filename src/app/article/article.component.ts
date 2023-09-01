@@ -10,29 +10,23 @@ import { HttpserviceService } from '../httpservice.service';
 export class ArticleComponent implements OnInit{
  
   @Input()
-  article!: Article;
+  public article!: Article;
   
   @Output()
   articleDeleted : EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private serviceDeMerde : HttpserviceService){ }
+  constructor(private serviceArticle : HttpserviceService){ }
 
   ngOnInit(): void {
       
   }
-  voteUp(){
-    this.article.voteUp();
-    return false;
-  }
 
-  voteDown(){
-    this.article.voteDown();
-    return false;
-  }
-
-  deleteArticle(id: string){
+  deleteArticle(id: number){
     console.log(id);
-    this.serviceDeMerde.deleteArticle(id);
+    this.serviceArticle.deleteArticle(id).subscribe(res =>{
+      this.articleDeleted.emit(true);
+    });
+   
   }
 
 

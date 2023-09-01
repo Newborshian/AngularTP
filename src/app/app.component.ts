@@ -1,40 +1,47 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from './article.model';
 import { HttpserviceService } from './httpservice.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
+
   title = 'Tp02';
-  articles!: Article[];
-  
-  addArticle(id: HTMLInputElement, title: HTMLInputElement, link: HTMLInputElement){
-    console.log(`Adding article title: ${title.value} and link: ${link.value}`);
-    this.articles.push(new Article(id.value, title.value, link.value, 0));
-    return false;
+  public articles: Article[] | null = null;
+  formArticle = this.fb.group({
+    id: ['', Validators.required],
+    title: ['', Validators.required],
+    link: ['', Validators.required]
+  }) 
+
+  constructor(private serviceArticle: HttpserviceService, private fb: FormBuilder){ }
+
+  ngOnInit(): void {
+    this.serviceArticle.getAllArticles();
+    this.serviceArticle.articles$.subscribe((res) => {
+      this.articles = res;
+    })
+    this.sortedArticles();
   }
 
-  constructor(private serviceArticle: HttpserviceService){
-  }
-
-  articleDeleted(event : boolean){
+  articleDeleted(event: boolean){
     if(event){
       this.ngOnInit();
     }
   }
-  sortedArticles(): Article[]{
-    return this.articles.sort((a: Article, b: Article) => b.votes - a.votes)
+
+  postArticle(formArticle: FormGroup){
+    this.serviceArticle.postArticle(formArticle.value).subscribe((res) => {
+        this.ngOnInit()
+      });  
   }
 
-  ngOnInit(): void {
-       this.serviceArticle.getArticles().subscribe(restArticles => this.articles = restArticles)
-       this.sortedArticles();
+  sortedArticles(){
+    this.articles!.sort((a: Article, b: Article) => b.votes - a.votes)
   }
 
-  ngOnDestroy(): void {
-      
-  }
 }  

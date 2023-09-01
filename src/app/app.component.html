@@ -1,8 +1,8 @@
-<form class="ui large form segment">
+<form class="ui large form segment" [formGroup]="formArticle" (ngSubmit)="postArticle(formArticle)">
   <h3 class="ui header">Add a Link</h3>
-  <div class="field"><label for="title">Title :</label><input name="title" placeholder="Entrez un titre" #newTitle></div>
-  <div class="field"><label for="link">Link :</label><input name="link" placeholder="Entrez un lien" #newLink></div>
-  <div class="field"><label for="id">Id:</label><input name="id" placeholder="Entrez un id LOL" #newId></div>
-  <button type="submit" (click)="addArticle(newId, newTitle, newLink)" class="ui positive ri">Submit</button>
+  <div class="field"><label for="title">Title :</label><input name="title" placeholder="Entrez un titre" formControlName="title" required></div>
+  <div class="field"><label for="link">Link :</label><input name="link" placeholder="Entrez un lien" formControlName="link" required></div>
+  <div class="field"><label for="id">Id:</label><input name="id" placeholder="Entrez un id LOL" formControlName="id" required></div>
+  <button type="submit">Envoyer</button>
 </form>
-<app-article *ngFor="let article of sortedArticles()" [article]="article" (articleDeleted)="articleDeleted($event)"></app-article>
+<app-article *ngFor="let article of articles" [article]="article" (articleDeleted)="articleDeleted($event)"></app-article>

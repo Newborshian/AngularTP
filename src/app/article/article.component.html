@@ -5,11 +5,11 @@
     </div>
 </div>
 <div class="twelve wide column">
-    <a href="{{ article.link }}" class="ui large header">{{
-        article.title}}</a>
+    <a href="{{ article.link }}" class="ui large header">{{article.title}}</a>
+    <p>id: {{article.id}}</p>
         <ul class="ui big horizontal list voters"></ul>
-        <button type="submit" (click)="voteUp()">VoteUp</button>
-        <button type="submit" (click)="voteDown()">voteDown</button>
+        <button type="submit">VoteUp</button>
+        <button type="submit">voteDown</button>
         <button type="submit" (click)="deleteArticle(article.id)">C'est un delete à l'arrache</button>
         
 </div>
