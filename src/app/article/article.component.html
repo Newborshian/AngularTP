@@ -1,0 +1,15 @@
+<div  class="four wide column center aligned votes">
+    <div class="ui statistic">
+        <div class="value">{{article.votes}}</div>
+        <div class="label">Points</div>
+    </div>
+</div>
+<div class="twelve wide column">
+    <a href="{{ article.link }}" class="ui large header">{{
+        article.title}}</a>
+        <ul class="ui big horizontal list voters"></ul>
+        <button type="submit" (click)="voteUp()">VoteUp</button>
+        <button type="submit" (click)="voteDown()">voteDown</button>
+        <button type="submit" (click)="deleteArticle(article.id)">C'est un delete à l'arrache</button>
+        
+</div>
