@@ -28,6 +28,15 @@ export class ArticleComponent implements OnInit{
     });
    
   }
+  voteUp() {
+    this.article.votes++;
+    console.log(this.article);
+    
+  }
 
+  
+  voteDown() {
+      this.article.votes--;
+  }
 
 }

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
 
   title = 'Tp02';
   public articles: Article[] | null = null;
@@ -35,7 +35,9 @@ export class AppComponent implements OnInit {
   }
 
   postArticle(formArticle: FormGroup){
-    this.serviceArticle.postArticle(formArticle.value).subscribe((res) => {
+    const article: Article = formArticle.value;
+    article.votes = 0;
+    this.serviceArticle.postArticle(article).subscribe((res) => {
         this.ngOnInit()
       });  
   }
